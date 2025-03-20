@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    background-color: black;
+    color: #ffffff;
+    font-family: 'VT323', monospace;
+    text-shadow: none;
+    overflow: hidden; /* ✅ ป้องกันการเลื่อนหน้าจอ */
+}
+
+/* ✅ เอฟเฟกต์ Flicker ของหน้าจอ */
+@keyframes flicker {
+    0% { opacity: 1; }
+    50% { opacity: 0.80; } /* ✅ ทำให้ดูเหมือนแสงจอเก่า */
+    100% { opacity: 1; }
+}
+
+.terminal {
+    border: 5px solid #ffffff;
+    box-shadow: none;
+    text-shadow: 0px 0px 27px rgba(255,255,255,0.43);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    animation: flicker 0.3s infinite alternate; /* ✅ คงไว้เฉพาะ Flicker Effect */
+}
+
+/* ✅ ลบเอฟเฟกต์ Distortion ออก */
+.distortion {
+    animation: none !important; /* ✅ ปิดการบิดเบี้ยว */
+}
+
+/* ✅ Scanline Effect แบบจอ CRT */
+.terminal::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.03) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    animation: flicker 0.3s infinite alternate;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    pre {
+        font-size: 16px;
+    }
+    input {
+        font-size: 16px;
+    }
+}

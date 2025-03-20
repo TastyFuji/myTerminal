@@ -1,0 +1,46 @@
+/* ทำให้เต็มจอ */
+.hacking-container {
+    background-color: black;
+    color: white;
+    font-family: monospace;
+    padding: 20px;
+    width: 100%;
+    height: 100vh; /* เต็มจอ */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  
+  /* พื้นที่แสดงผล */
+  .hacking-output {
+    flex-grow: 1;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size: 14px;
+    padding: 6px;
+    text-transform: uppercase;
+  }
+  
+  /* ช่องอินพุต */
+  .hacking-input {
+    background: black;
+    color: white;
+    border: none;
+    font-family: monospace;
+    font-size: 14px;
+    width: 100%;
+    outline: none;
+    padding: 5px;
+  }
+  
+  /* เส้นขอบช่องอินพุตให้ดูสมจริง */
+  .input-line {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-line span {
+    margin-right: 5px;
+  }
+  

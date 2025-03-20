@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* ตั้งค่าเริ่มต้นของ Body */
+body, html {
+    background-color: black;
+    color: white; /* ✅ เปลี่ยนเป็นสีขาว */
+    font-family: 'VT323', monospace;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* ✅ ลบสไตล์สีเขียวที่ไม่ต้องการออก */
+
+/* ❌ ลบสิ่งเหล่านี้ เพราะเราย้ายไป `terminal.css` แล้ว
+    text-shadow: 0 0 5px #33ff33;
+    border: 5px solid #33ff33;
+    box-shadow: 0 0 15px #33ff33;
+    animation: flicker 0.1s infinite;
+*/
+
+/* ❌ ลบ CRT Effect ออก เพราะเรามี `terminal.css` ควบคุมแล้ว */
+/*
+.terminal::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.2) 50%);
+    background-size: 100% 4px;
+    opacity: 0.1;
+    pointer-events: none;
+}
+*/
+
+/* ❌ ลบ Keyframe Flicker ที่ซ้ำกันออก เพราะเรามีใน `terminal.css` แล้ว */
+/*
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+*/
+
+/* ✅ ยังคงให้ Responsive ทำงาน */
+@media screen and (max-width: 768px) {
+    pre {
+        font-size: 16px;
+    }
+
+    input {
+        font-size: 16px;
+    }
+}
