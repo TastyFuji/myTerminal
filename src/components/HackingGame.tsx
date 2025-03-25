@@ -150,6 +150,7 @@ export default function HackingGame({ onExit, displayName, isLoggedIn, userId }:
           onKeyDown={handleCommand}
           autoFocus
           className="hacking-input"
+          aria-label="Terminal command input"
         />
       </div>
     </div>
