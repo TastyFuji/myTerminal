@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import "../styles/hacking.css"; // ตรวจสอบให้แน่ใจว่าไฟล์ CSS ถูกต้อง
+import { useState, useEffect, useRef, RefObject } from "react";
+import "../styles/hacking.css";
+import { useGlobalKeySound } from "../hooks/useGlobalKeySound";
 
 const BASE_WORDS = [
   "HACK", "BACK", "PACK", "LACK", "TACK", "RACK",
@@ -10,10 +11,11 @@ const BASE_WORDS = [
 
 const MAX_ATTEMPTS = 4;
 
-/** ✅ ฟังก์ชันสุ่ม Word List โดยให้คำที่คล้ายกันไม่เกิน 3 คำ */
+/**สุ่ม Word List โดยให้คำที่คล้ายกันไม่เกิน 3 คำ */
 function generateWordList() {
   const wordPatterns: { [key: string]: number } = {}; // นับแพทเทิร์นที่ซ้ำกัน
   const filteredWords: string[] = [];
+  
 
   for (const word of BASE_WORDS) {
     const pattern = word.slice(1); // ใช้ 3 ตัวสุดท้ายเป็นแพทเทิร์น (เช่น "ACK", "ODE")
@@ -37,6 +39,10 @@ export default function HackingGame({ onExit }: { onExit: () => void }) {
   const [attemptsLeft, setAttemptsLeft] = useState(MAX_ATTEMPTS);
   const [output, setOutput] = useState<string[]>([]);
   const [command, setCommand] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  //เสียง
+  useGlobalKeySound(inputRef as RefObject<HTMLElement>);
 
   useEffect(() => {
     const newWordList = generateWordList();
@@ -117,6 +123,7 @@ export default function HackingGame({ onExit }: { onExit: () => void }) {
         <span>{"> "} </span>
         <input
           type="text"
+          ref={inputRef}
           value={command}
           onChange={(e) => setCommand(e.target.value)}
           onKeyDown={handleCommand}

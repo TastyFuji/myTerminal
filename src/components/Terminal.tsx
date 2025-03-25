@@ -1,6 +1,7 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, RefObject } from "react";
 import "../styles/terminal.css";
 import HackingGame from "./HackingGame";
+import { useGlobalKeySound } from "../hooks/useGlobalKeySound";
 
 export default function Terminal() {
     const [output, setOutput] = useState<string[]>([
@@ -22,6 +23,9 @@ export default function Terminal() {
     useEffect(() => {
         inputRef.current?.focus();
     }, []);
+
+    //เสียง
+    useGlobalKeySound(inputRef as RefObject<HTMLElement>);
 
     const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter") {
