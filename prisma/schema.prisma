@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  username      String   @unique
+  password      String
+  displayName   String
+  role          String   @default("user")
+
+  // เปลี่ยนจาก hackingLevel เป็น reward หลายอัน
+  rewards       Reward[]
+}
+
+model Reward {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  game      String   // เช่น "hacking-1", "hacking-2"
+  level     Int      // เช่น level ที่ผ่าน, หรือ 1 แปลว่าผ่านแล้ว
+  createdAt DateTime @default(now())
+
+  @@unique([userId, game]) // ✅ 1 user เล่น 1 เกมได้ครั้งเดียว
+}
