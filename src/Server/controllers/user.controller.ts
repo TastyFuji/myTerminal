@@ -4,14 +4,17 @@ import prisma from "../prisma";
 
 export const createUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { username, password, displayName, hackingLevel = 0, role = "user" } = req.body;
+    const { username, password, displayName, role = "user" } = req.body;
 
     if (!username || !password || !displayName) {
       res.status(400).json({ error: "Missing required fields." });
       return;
     }
 
-    const existingUser = await prisma.user.findUnique({ where: { username } });
+    const existingUser = await prisma.user.findUnique({
+      where: { username },
+    });
+
     if (existingUser) {
       res.status(409).json({ error: "Username already exists." });
       return;
@@ -24,7 +27,6 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
         username,
         password: hashedPassword,
         displayName,
-        hackingLevel,
         role,
       },
     });
@@ -35,7 +37,6 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
         id: newUser.id,
         username: newUser.username,
         displayName: newUser.displayName,
-        hackingLevel: newUser.hackingLevel,
         role: newUser.role,
       },
     });

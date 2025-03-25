@@ -3,6 +3,6 @@ import { checkReward } from "../controllers/checkreward.controller";
 
 const router = express.Router();
 
-router.post("/addReward", checkReward);
+router.post("/checkreward", checkReward);
 
 export default router;
